@@ -15,7 +15,7 @@ export default function Dashboard() {
           </div>
           <div className="relative">
             <img
-              alt="Profile Picture"
+              alt="Profile"
               className="w-12 h-12 rounded-full border-2 border-white shadow-sm object-cover"
               src="https://lh3.googleusercontent.com/aida-public/AB6AXuCFUuKwf6IW-9yISUdkt2Ni0qvUPmk6LgpkFWxVvJSJIQxon1WNNSeOrXL9SuFjBpFCd_rbP7gMRZg3nUNaEN78VFzNyWlGwNBnwaKw00ZwzGXQ0dyz_P_dP6jRsyGUtavJLp5uzBMT5ttuq0kpml-Skz_Q6mUkEUSfyQqlLzrnFTnGxqk_7EAW7ZpxcGtQbV1XHAKeSU8Uw9nauVGf462S85ShVdnKwC6VlifXkr8bHtqlBGgbVB9pm5fDQZ5jfmCm7HA_HCJhEIH0"
             />
