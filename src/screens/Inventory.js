@@ -254,9 +254,9 @@ export default function Inventory() {
           <div className="h-8" />
         </div>
 
-        {/* Bottom Nav */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 w-full px-6 pointer-events-none">
-          <div className="bg-[#1C1C1E] text-white backdrop-blur-lg flex items-center justify-between px-2 py-2 rounded-[32px] shadow-2xl pointer-events-auto max-w-[320px] mx-auto">
+        {/* Bottom Nav - Fixed floating */}
+        <div className="fixed bottom-8 left-0 right-0 z-50 flex justify-center pointer-events-none">
+          <div className="bg-[#1C1C1E] text-white backdrop-blur-lg flex items-center justify-between px-2 py-2 rounded-[32px] shadow-2xl pointer-events-auto max-w-[320px] mx-4">
             <button
               type="button"
               onClick={() => navigate('/dashboard')}
