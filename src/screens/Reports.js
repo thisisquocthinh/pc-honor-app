@@ -1,206 +1,70 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import {
-  Box,
-  Typography,
-  AppBar,
-  Toolbar,
-  IconButton,
-  Card,
-  CardContent,
-  Grid,
-  Tabs,
-  Tab,
-  List,
-  ListItem,
-  ListItemText
-} from '@mui/material';
-import {
-  ArrowBack,
-  TrendingUp,
-  TrendingDown,
-  CalendarToday
-} from '@mui/icons-material';
-import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  ResponsiveContainer,
-  BarChart,
-  Bar
-} from 'recharts';
 
-const HONOR_BLUE = '#0099FF';
-
-const Reports = () => {
+export default function Reports() {
   const navigate = useNavigate();
-  const [tabValue, setTabValue] = useState(0);
-
-  const salesData = [
-    { name: 'T2', sales: 4 },
-    { name: 'T3', sales: 3 },
-    { name: 'T4', sales: 5 },
-    { name: 'T5', sales: 2 },
-    { name: 'T6', sales: 6 },
-    { name: 'T7', sales: 8 },
-    { name: 'CN', sales: 5 }
-  ];
-
-  const revenueData = [
-    { name: 'T1', revenue: 120 },
-    { name: 'T2', revenue: 150 },
-    { name: 'T3', revenue: 180 },
-    { name: 'T4', revenue: 140 }
-  ];
-
-  const transactions = [
-    { id: 1, date: '04/02/2025', product: 'Honor MagicBook 14', amount: 15990000, type: 'income' },
-    { id: 2, date: '04/02/2025', product: 'Honor Mouse (x3)', amount: 1350000, type: 'income' },
-    { id: 3, date: '03/02/2025', product: 'Nhập kho Honor Keyboard', amount: -5000000, type: 'expense' },
-    { id: 4, date: '03/02/2025', product: 'Honor Monitor 27"', amount: 8500000, type: 'income' }
-  ];
-
   return (
-    <Box>
-      {/* Header */}
-      <AppBar position="sticky" elevation={0} sx={{ bgcolor: 'background.paper' }}>
-        <Toolbar>
-          <IconButton edge="start" onClick={() => navigate('/dashboard')} sx={{ mr: 2 }}>
-            <ArrowBack />
-          </IconButton>
-          <Typography variant="h6" sx={{ flexGrow: 1, fontWeight: 700 }}>
-            Báo cáo & Thống kê
-          </Typography>
-        </Toolbar>
-      </AppBar>
+    <div className="bg-background-light min-h-screen flex justify-center">
+      <div className="w-full max-w-md bg-background-light min-h-screen relative shadow-2xl overflow-hidden pb-24">
+        <header className="px-6 pt-12 pb-4 flex items-center gap-3">
+          <button onClick={() => navigate('/dashboard')} className="w-10 h-10 rounded-full bg-white shadow-sm border border-gray-100 flex items-center justify-center">
+            <span className="material-icons-outlined">arrow_back</span>
+          </button>
+          <div>
+            <h1 className="text-xl font-bold">Daily Report</h1>
+            <p className="text-sm text-gray-500">Summary & insights</p>
+          </div>
+        </header>
 
-      {/* Stats Cards */}
-      <Box sx={{ px: 3, py: 2 }}>
-        <Grid container spacing={2}>
-          <Grid item xs={6}>
-            <Card sx={{ bgcolor: '#DBEAFE' }}>
-              <CardContent>
-                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                  <TrendingUp sx={{ color: HONOR_BLUE }} />
-                  <Typography variant="body2" color="text.secondary">
-                    Doanh thu tháng
-                  </Typography>
-                </Box>
-                <Typography variant="h5" sx={{ fontWeight: 700, mt: 1 }}>
-                  45.8M đ
-                </Typography>
-                <Typography variant="caption" sx={{ color: '#22C55E' }}>
-                  +12% so với tháng trước
-                </Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-          <Grid item xs={6}>
-            <Card sx={{ bgcolor: '#FEF3C7' }}>
-              <CardContent>
-                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                  <TrendingDown sx={{ color: '#F59E0B' }} />
-                  <Typography variant="body2" color="text.secondary">
-                    Chi phí tháng
-                  </Typography>
-                </Box>
-                <Typography variant="h5" sx={{ fontWeight: 700, mt: 1 }}>
-                  12.5M đ
-                </Typography>
-                <Typography variant="caption" sx={{ color: '#EF4444' }}>
-                  +5% so với tháng trước
-                </Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-        </Grid>
-      </Box>
+        <div className="px-6 space-y-4">
+          <div className="grid grid-cols-3 gap-3">
+            <div className="bg-white p-4 rounded-2xl shadow-sm border border-gray-100">
+              <p className="text-xs text-gray-500">Today's Sales</p>
+              <p className="text-lg font-bold mt-1">$1,598</p>
+            </div>
+            <div className="bg-white p-4 rounded-2xl shadow-sm border border-gray-100">
+              <p className="text-xs text-gray-500">Net Profit</p>
+              <p className="text-lg font-bold mt-1">$312</p>
+            </div>
+            <div className="bg-white p-4 rounded-2xl shadow-sm border border-gray-100">
+              <p className="text-xs text-gray-500">Total Bonus</p>
+              <p className="text-lg font-bold mt-1">$150</p>
+            </div>
+          </div>
 
-      {/* Tabs */}
-      <Box sx={{ px: 3, mb: 2 }}>
-        <Tabs
-          value={tabValue}
-          onChange={(e, v) => setTabValue(v)}
-          variant="fullWidth"
-          sx={{ bgcolor: 'background.paper', borderRadius: 2 }}
-        >
-          <Tab label="Doanh số" />
-          <Tab label="Doanh thu" />
-          <Tab label="Giao dịch" />
-        </Tabs>
-      </Box>
+          <div className="bg-white p-4 rounded-2xl shadow-sm border border-gray-100">
+            <div className="flex items-center justify-between mb-3">
+              <h2 className="text-sm font-bold">Sales Trend</h2>
+              <span className="text-xs text-gray-500">(placeholder)</span>
+            </div>
+            <div className="h-40 rounded-xl bg-background-light flex items-center justify-center text-gray-400 text-sm">
+              Chart placeholder (Tailwind port pending)
+            </div>
+          </div>
 
-      {/* Tab Content */}
-      <Box sx={{ px: 3, pb: 4 }}>
-        {tabValue === 0 && (
-          <Card sx={{ p: 2, borderRadius: 3 }}>
-            <Typography variant="h6" sx={{ fontWeight: 700, mb: 2 }}>
-              Doanh số tuần này
-            </Typography>
-            <ResponsiveContainer width="100%" height={200}>
-              <LineChart data={salesData}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" />
-                <YAxis />
-                <Tooltip />
-                <Line type="monotone" dataKey="sales" stroke={HONOR_BLUE} strokeWidth={3} />
-              </LineChart>
-            </ResponsiveContainer>
-          </Card>
-        )}
+          <div>
+            <div className="flex items-center justify-between mb-3">
+              <h2 className="text-lg font-bold">Recent Transactions</h2>
+              <button className="text-xs font-semibold text-primary">See all</button>
+            </div>
+            <div className="space-y-3">
+              <div className="bg-white p-3 rounded-2xl shadow-sm border border-gray-100 flex items-center gap-4">
+                <div className="w-14 h-14 rounded-xl bg-gray-100" />
+                <div className="flex-1">
+                  <h4 className="text-sm font-bold">Honor MagicBook 14</h4>
+                  <p className="text-xs text-gray-500 mt-0.5">Sold • 10:42 AM</p>
+                </div>
+                <div className="text-right">
+                  <p className="text-sm font-bold">$799</p>
+                  <span className="inline-block px-2 py-0.5 rounded-md bg-green-100 text-[10px] font-bold text-green-600">Paid</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
 
-        {tabValue === 1 && (
-          <Card sx={{ p: 2, borderRadius: 3 }}>
-            <Typography variant="h6" sx={{ fontWeight: 700, mb: 2 }}>
-              Doanh thu theo tháng
-            </Typography>
-            <ResponsiveContainer width="100%" height={200}>
-              <BarChart data={revenueData}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" />
-                <YAxis />
-                <Tooltip />
-                <Bar dataKey="revenue" fill={HONOR_BLUE} radius={[4, 4, 0, 0]} />
-              </BarChart>
-            </ResponsiveContainer>
-          </Card>
-        )}
-
-        {tabValue === 2 && (
-          <Card sx={{ borderRadius: 3 }}>
-            <List>
-              {transactions.map((t, i) => (
-                <ListItem key={t.id} divider={i < transactions.length - 1}>
-                  <ListItemText
-                    primary={t.product}
-                    secondary={
-                      <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                        <CalendarToday sx={{ fontSize: 14 }} />
-                        <Typography variant="caption">{t.date}</Typography>
-                      </Box>
-                    }
-                  />
-                  <Typography
-                    variant="body2"
-                    sx={{
-                      fontWeight: 600,
-                      color: t.type === 'income' ? '#22C55E' : '#EF4444'
-                    }}
-                  >
-                    {t.type === 'income' ? '+' : ''}
-                    {t.amount.toLocaleString()}đ
-                  </Typography>
-                </ListItem>
-              ))}
-            </List>
-          </Card>
-        )}
-      </Box>
-    </Box>
+        <div className="h-8" />
+      </div>
+    </div>
   );
-};
-
-export default Reports;
+}

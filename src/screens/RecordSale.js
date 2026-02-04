@@ -1,274 +1,99 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import {
-  Box,
-  Typography,
-  AppBar,
-  Toolbar,
-  IconButton,
-  Stepper,
-  Step,
-  StepLabel,
-  Button,
-  TextField,
-  Card,
-  CardContent,
-  List,
-  ListItem,
-  ListItemText,
-  ListItemAvatar,
-  Avatar,
-  Checkbox,
-  Divider,
-  Dialog,
-  DialogContent,
-  DialogActions
-} from '@mui/material';
-import {
-  ArrowBack,
-  CheckCircle
-} from '@mui/icons-material';
 
-const HONOR_BLUE = '#0099FF';
-
-const RecordSale = () => {
+export default function RecordSale() {
   const navigate = useNavigate();
-  const [activeStep, setActiveStep] = useState(0);
-  const [selectedProducts, setSelectedProducts] = useState([]);
-  const [customerInfo, setCustomerInfo] = useState({ name: '', phone: '', email: '' });
-  const [successDialog, setSuccessDialog] = useState(false);
-
-  const products = [
-    { id: 1, name: 'Honor MagicBook 14', price: 15990000, stock: 15, image: '💻' },
-    { id: 2, name: 'Honor MagicBook 16', price: 18990000, stock: 8, image: '💻' },
-    { id: 3, name: 'Honor Monitor 27"', price: 8500000, stock: 3, image: '🖥️' },
-    { id: 4, name: 'Honor Mouse', price: 450000, stock: 45, image: '🖱️' },
-    { id: 5, name: 'Honor Keyboard', price: 890000, stock: 22, image: '⌨️' },
-    { id: 6, name: 'Honor Pad 8', price: 6990000, stock: 2, image: '📱' }
-  ];
-
-  const steps = ['Chọn sản phẩm', 'Thông tin KH', 'Xác nhận'];
-
-  const toggleProduct = (product) => {
-    const exists = selectedProducts.find(p => p.id === product.id);
-    if (exists) {
-      setSelectedProducts(selectedProducts.filter(p => p.id !== product.id));
-    } else {
-      setSelectedProducts([...selectedProducts, { ...product, quantity: 1 }]);
-    }
-  };
-
-  const totalAmount = selectedProducts.reduce((sum, p) => sum + p.price * p.quantity, 0);
-
-  const handleNext = () => {
-    if (activeStep === steps.length - 1) {
-      setSuccessDialog(true);
-    } else {
-      setActiveStep(activeStep + 1);
-    }
-  };
-
-  const handleBack = () => {
-    setActiveStep(activeStep - 1);
-  };
 
   return (
-    <Box sx={{ pb: 10 }}>
-      {/* Header */}
-      <AppBar position="sticky" elevation={0} sx={{ bgcolor: 'background.paper' }}>
-        <Toolbar>
-          <IconButton edge="start" onClick={() => navigate('/dashboard')} sx={{ mr: 2 }}>
-            <ArrowBack />
-          </IconButton>
-          <Typography variant="h6" sx={{ flexGrow: 1, fontWeight: 700 }}>
-            Ghi nhận bán hàng
-          </Typography>
-        </Toolbar>
-      </AppBar>
+    <div className="bg-background-light font-display text-slate-900 antialiased min-h-screen flex justify-center">
+      <div className="w-full max-w-md bg-background-light min-h-screen relative shadow-2xl overflow-hidden">
+        {/* Sticky Top Navigation */}
+        <div className="sticky top-0 z-50 bg-background-light/80 backdrop-blur-md border-b border-slate-200">
+          <div className="flex items-center p-4 justify-between max-w-md mx-auto">
+            <div className="flex items-center gap-3">
+              <button onClick={() => navigate('/dashboard')} aria-label="Back">
+                <span className="material-symbols-outlined text-slate-900 cursor-pointer">arrow_back_ios</span>
+              </button>
+              <h2 className="text-lg font-bold tracking-tight">Record Daily Sale</h2>
+            </div>
+            <span className="material-symbols-outlined text-primary">history</span>
+          </div>
+          {/* Search Component */}
+          <div className="px-4 pb-4 max-w-md mx-auto">
+            <label className="flex flex-col w-full">
+              <div className="flex w-full items-stretch rounded-xl h-12 bg-white shadow-sm border border-slate-200">
+                <div className="text-slate-400 flex items-center justify-center pl-4">
+                  <span className="material-symbols-outlined">search</span>
+                </div>
+                <input className="form-input flex w-full border-none bg-transparent focus:ring-0 text-base font-normal placeholder:text-slate-400 px-3" placeholder="Search Honor model..." defaultValue="" />
+              </div>
+            </label>
+          </div>
+        </div>
 
-      {/* Stepper */}
-      <Box sx={{ px: 3, py: 2 }}>
-        <Stepper activeStep={activeStep} alternativeLabel>
-          {steps.map((label) => (
-            <Step key={label}>
-              <StepLabel>{label}</StepLabel>
-            </Step>
-          ))}
-        </Stepper>
-      </Box>
+        {/* Main Content Area */}
+        <main className="max-w-md mx-auto p-4 pb-40">
+          <h3 className="text-sm font-semibold text-slate-500 uppercase tracking-wider mb-4">Select Model & Variants</h3>
+          <div className="space-y-4">
+            <div className="rounded-xl border border-slate-200 bg-white overflow-hidden shadow-sm">
+              <details className="group" open>
+                <summary className="flex cursor-pointer items-center justify-between p-4 hover:bg-slate-50 transition-colors">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
+                      <span className="material-symbols-outlined text-primary">smartphone</span>
+                    </div>
+                    <div>
+                      <p className="text-base font-bold">Honor X9D</p>
+                      <p className="text-xs text-slate-500">2 Variants Available</p>
+                    </div>
+                  </div>
+                  <span className="material-symbols-outlined text-slate-400 group-open:rotate-180 transition-transform">expand_more</span>
+                </summary>
 
-      {/* Step 1: Select Products */}
-      {activeStep === 0 && (
-        <Box sx={{ px: 3 }}>
-          <Typography variant="h6" sx={{ fontWeight: 700, mb: 2 }}>
-            Chọn sản phẩm
-          </Typography>
-          <Card>
-            <List>
-              {products.map((product) => (
-                <ListItem key={product.id} divider>
-                  <Checkbox
-                    checked={selectedProducts.some(p => p.id === product.id)}
-                    onChange={() => toggleProduct(product)}
-                  />
-                  <ListItemAvatar>
-                    <Avatar sx={{ bgcolor: '#DBEAFE' }}>
-                      <Typography>{product.image}</Typography>
-                    </Avatar>
-                  </ListItemAvatar>
-                  <ListItemText
-                    primary={product.name}
-                    secondary={`Tồn kho: ${product.stock}`}
-                  />
-                  <Typography variant="body1" sx={{ fontWeight: 600 }}>
-                    {product.price.toLocaleString()}đ
-                  </Typography>
-                </ListItem>
-              ))}
-            </List>
-          </Card>
-        </Box>
-      )}
+                <div className="px-4 pb-4 divide-y divide-slate-100">
+                  <div className="flex items-center justify-between py-4">
+                    <div className="flex flex-col">
+                      <p className="text-sm font-medium">Midnight Black</p>
+                      <p className="text-xs text-slate-500">8GB/256GB</p>
+                      <div className="mt-2 inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-slate-100 text-[10px] font-semibold">
+                        <span className="w-1.5 h-1.5 rounded-full bg-green-500" />
+                        Stock: 12
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <button className="flex h-8 w-8 items-center justify-center rounded-full bg-slate-100 text-slate-600 hover:bg-primary/20 hover:text-primary transition-colors" aria-label="Decrease">
+                        <span className="material-symbols-outlined text-sm">remove</span>
+                      </button>
+                      <span className="w-6 text-center font-bold text-primary">1</span>
+                      <button className="flex h-8 w-8 items-center justify-center rounded-full bg-slate-100 text-slate-600 hover:bg-primary/20 hover:text-primary transition-colors" aria-label="Increase">
+                        <span className="material-symbols-outlined text-sm">add</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </details>
+            </div>
+          </div>
+        </main>
 
-      {/* Step 2: Customer Info */}
-      {activeStep === 1 && (
-        <Box sx={{ px: 3 }}>
-          <Typography variant="h6" sx={{ fontWeight: 700, mb: 2 }}>
-            Thông tin khách hàng
-          </Typography>
-          <Card sx={{ p: 3 }}>
-            <TextField
-              fullWidth
-              label="Họ tên"
-              value={customerInfo.name}
-              onChange={(e) => setCustomerInfo({ ...customerInfo, name: e.target.value })}
-              margin="normal"
-            />
-            <TextField
-              fullWidth
-              label="Số điện thoại"
-              value={customerInfo.phone}
-              onChange={(e) => setCustomerInfo({ ...customerInfo, phone: e.target.value })}
-              margin="normal"
-            />
-            <TextField
-              fullWidth
-              label="Email"
-              value={customerInfo.email}
-              onChange={(e) => setCustomerInfo({ ...customerInfo, email: e.target.value })}
-              margin="normal"
-            />
-          </Card>
-        </Box>
-      )}
-
-      {/* Step 3: Confirm */}
-      {activeStep === 2 && (
-        <Box sx={{ px: 3 }}>
-          <Typography variant="h6" sx={{ fontWeight: 700, mb: 2 }}>
-            Xác nhận đơn hàng
-          </Typography>
-          <Card sx={{ mb: 2 }}>
-            <CardContent>
-              <Typography variant="subtitle2" color="text.secondary" gutterBottom>
-                Khách hàng
-              </Typography>
-              <Typography variant="body1" sx={{ mb: 2 }}>
-                {customerInfo.name || 'Khách lẻ'} • {customerInfo.phone || 'N/A'}
-              </Typography>
-              <Divider sx={{ my: 2 }} />
-              <Typography variant="subtitle2" color="text.secondary" gutterBottom>
-                Sản phẩm
-              </Typography>
-              <List dense>
-                {selectedProducts.map((p) => (
-                  <ListItem key={p.id}>
-                    <ListItemText
-                      primary={p.name}
-                      secondary={`x${p.quantity}`}
-                    />
-                    <Typography variant="body2">
-                      {(p.price * p.quantity).toLocaleString()}đ
-                    </Typography>
-                  </ListItem>
-                ))}
-              </List>
-              <Divider sx={{ my: 2 }} />
-              <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <Typography variant="h6">Tổng tiền</Typography>
-                <Typography variant="h5" sx={{ fontWeight: 700, color: HONOR_BLUE }}>
-                  {totalAmount.toLocaleString()}đ
-                </Typography>
-              </Box>
-            </CardContent>
-          </Card>
-        </Box>
-      )}
-
-      {/* Bottom Actions */}
-      <Box
-        sx={{
-          position: 'fixed',
-          bottom: 0,
-          left: 0,
-          right: 0,
-          p: 2,
-          bgcolor: 'background.paper',
-          borderTop: 1,
-          borderColor: 'divider',
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center'
-        }}
-      >
-        <Box>
-          <Typography variant="body2" color="text.secondary">
-            Tổng tiền
-          </Typography>
-          <Typography variant="h6" sx={{ fontWeight: 700, color: HONOR_BLUE }}>
-            {totalAmount.toLocaleString()}đ
-          </Typography>
-        </Box>
-        <Box sx={{ display: 'flex', gap: 1 }}>
-          {activeStep > 0 && (
-            <Button onClick={handleBack} variant="outlined">
-              Quay lại
-            </Button>
-          )}
-          <Button
-            variant="contained"
-            onClick={handleNext}
-            disabled={activeStep === 0 && selectedProducts.length === 0}
-            sx={{ bgcolor: HONOR_BLUE }}
-          >
-            {activeStep === steps.length - 1 ? 'Hoàn tất' : 'Tiếp theo'}
-          </Button>
-        </Box>
-      </Box>
-
-      {/* Success Dialog */}
-      <Dialog open={successDialog} onClose={() => {}}>
-        <DialogContent sx={{ textAlign: 'center', pt: 4 }}>
-          <CheckCircle sx={{ fontSize: 64, color: '#22C55E', mb: 2 }} />
-          <Typography variant="h5" sx={{ fontWeight: 700, mb: 1 }}>
-            Ghi nhận thành công!
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            Đơn hàng đã được lưu vào hệ thống
-          </Typography>
-        </DialogContent>
-        <DialogActions sx={{ justifyContent: 'center', pb: 3 }}>
-          <Button
-            variant="contained"
-            onClick={() => navigate('/dashboard')}
-            sx={{ bgcolor: HONOR_BLUE }}
-          >
-            Về trang chủ
-          </Button>
-        </DialogActions>
-      </Dialog>
-    </Box>
+        {/* Bottom Nav */}
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 w-full px-6 pointer-events-none">
+          <div className="bg-[#1C1C1E] text-white backdrop-blur-lg flex items-center justify-between px-2 py-2 rounded-[32px] shadow-2xl pointer-events-auto max-w-[320px] mx-auto">
+            <button onClick={() => navigate('/dashboard')} className="w-12 h-12 bg-white text-black rounded-full flex items-center justify-center shadow-md">
+              <span className="material-icons-outlined">home</span>
+            </button>
+            <button onClick={() => navigate('/inventory')} className="w-12 h-12 text-gray-400 hover:text-white rounded-full flex items-center justify-center transition-colors">
+              <span className="material-icons-outlined">inventory_2</span>
+            </button>
+            <button onClick={() => navigate('/reports')} className="w-12 h-12 text-gray-400 hover:text-white rounded-full flex items-center justify-center transition-colors">
+              <span className="material-icons-outlined">analytics</span>
+            </button>
+            <button className="w-12 h-12 text-gray-400 hover:text-white rounded-full flex items-center justify-center transition-colors">
+              <span className="material-icons-outlined">grid_view</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
   );
-};
-
-export default RecordSale;
+}
