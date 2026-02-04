@@ -29,7 +29,6 @@ const BG_GRADIENT = 'linear-gradient(180deg, #E8F4FD 0%, #F8FBFF 50%, #FFFFFF 10
 
 const Dashboard = () => {
   const navigate = useNavigate();
-  const [navValue, setNavValue] = useState(0);
 
   const scrollStats = [
     { icon: '💰', label: 'Bonus Earned', value: '$150.00', color: '#3B82F6', bg: '#EFF6FF' },
